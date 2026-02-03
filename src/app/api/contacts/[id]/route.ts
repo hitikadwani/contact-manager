@@ -9,8 +9,9 @@ async function getUserId() {
 
 export async function GET(
   _req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const userId = await getUserId();
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -19,7 +20,7 @@ export async function GET(
   const contacts = await sql`
     SELECT id, name, phone, email, company, COALESCE(favorite, false) AS favorite
     FROM contacts
-    WHERE id = ${params.id}
+    WHERE id = ${id}
       AND user_id = ${userId}
   `;
 
@@ -32,8 +33,9 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const userId = await getUserId();
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -76,13 +78,13 @@ export async function PUT(
       phone = ${digitsOnly},
       email = ${email.trim()},
       company = ${company.trim()}
-    WHERE id = ${params.id}
+    WHERE id = ${id}
       AND user_id = ${userId}
   `;
   if (typeof favorite === "boolean") {
     await sql`
       UPDATE contacts SET favorite = ${favorite}
-      WHERE id = ${params.id} AND user_id = ${userId}
+      WHERE id = ${id} AND user_id = ${userId}
     `;
   }
 
@@ -91,8 +93,9 @@ export async function PUT(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const userId = await getUserId();
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -103,7 +106,7 @@ export async function PATCH(
   await sql`
     UPDATE contacts
     SET favorite = ${favorite === true}
-    WHERE id = ${params.id}
+    WHERE id = ${id}
       AND user_id = ${userId}
   `;
 
@@ -112,8 +115,9 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const userId = await getUserId();
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -121,7 +125,7 @@ export async function DELETE(
 
   const result = await sql`
     DELETE FROM contacts
-    WHERE id = ${params.id}
+    WHERE id = ${id}
       AND user_id = ${userId}
   `;
 

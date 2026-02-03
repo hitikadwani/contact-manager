@@ -2,7 +2,8 @@ import { cookies } from "next/headers";
 import { sql } from "./db";
 
 export async function getCurrentUser() {
-  const session = cookies().get("session")?.value;
+  const cookieStore = await cookies();
+  const session = cookieStore.get("session")?.value;
   if (!session) return null;
 
   const users =

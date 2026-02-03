@@ -1,26 +1,369 @@
-@import "tailwindcss";
+/* src/app/globals.css */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  background: #f5f5f5;
+}
+
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  width: 320px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 20px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.auth-input:focus {
+  border-color: #ff0000;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background: #e60000;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-button:hover {
+  background: #cc0000;
+}
+
+.auth-switch {
+  margin-top: 14px;
+  font-size: 14px;
+  color: #e60000;
+  cursor: pointer;
+}
+
+/* ================= Dashboard ================= */
+
+.dashboard-wrapper {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 40px;
+}
+
+.dashboard-card {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 16px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-input {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.search-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  background: #e60000;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.search-btn:hover {
+  background: #cc0000;
+}
+
+.logout-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.logout-btn:hover {
+  background: #f5f5f5;
+}
+
+.profile-icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.dashboard-content {
+  margin-top: 24px;
+}
+
+.dashboard-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.add-btn {
+  display: inline-block;
+  background: #e60000;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.add-btn:hover {
+  background: #cc0000;
+}
+
+.view-link {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.view-link:hover {
+  text-decoration: underline;
+}
+
+.empty-cell,
+.loading-text {
+  text-align: center;
+  color: #666;
+  padding: 24px;
+}
+
+.password-hint {
+  font-size: 12px;
+  color: #666;
+  margin: -6px 0 12px 0;
+}
+
+.error-text {
+  color: #c00;
+  margin-bottom: 12px;
+}
+
+.table-wrapper {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #fafafa;
+}
+
+th,
+td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.email {
+  color: #0070f3;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.star,
+.star-btn {
+  font-size: 18px;
+  color: #ccc;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+.star.active,
+.star-btn.active {
+  color: #e60000;
+}
+
+.star-btn:hover {
+  color: #999;
+}
+
+.star-btn.active:hover {
+  color: #cc0000;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.pagination button {
+  border: none;
+  background: #e0e0e0;
+  padding: 6px 12px;
+  border-radius: 12px;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+/* ================= Contact Details ================= */
+
+.contact-wrapper {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 40px;
+}
+
+.contact-card {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  position: relative;
+}
+
+.contact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-btn {
+  background: black;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.contact-header h2 {
+  font-size: 18px;
+}
+
+.contact-form {
+  width: 280px;
+  margin: 60px auto 0;
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.contact-form label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 8px 12px;
+  margin-top: 4px;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.contact-form textarea {
+  resize: none;
+}
+
+.contact-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.save-btn {
+  background: #e60000;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  display: inline-block;
+  background: #e0e0e0;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+}
+
+.delete-btn {
+  background: #e60000;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 16px;
+  cursor: pointer;
 }

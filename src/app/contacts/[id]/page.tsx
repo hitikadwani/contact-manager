@@ -1,4 +1,4 @@
-// Contact detail – view / edit / delete – GET/PUT/DELETE /api/contacts/[id]
+
 'use client';
 
 import { useState, useEffect } from 'react';

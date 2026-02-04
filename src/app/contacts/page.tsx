@@ -1,4 +1,4 @@
-// New contact page – POST /api/contacts
+
 'use client';
 
 import { useState } from 'react';

@@ -1,4 +1,4 @@
-// src/app/dashboard/page.tsx
+
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -62,9 +62,15 @@ export default function DashboardPage() {
   const toggleFavorite = async (contact: Contact) => {
     const next = !contact.favorite;
     const res = await fetch(`/api/contacts/${contact.id}`, {
-      method: 'PATCH',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ favorite: next }),
+      body: JSON.stringify({
+        name: contact.name,
+        phone: contact.phone,
+        email: contact.email ?? '',
+        company: contact.company ?? '',
+        favorite: next,
+      }),
     });
     if (res.ok) {
       setContacts((prev) =>

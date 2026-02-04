@@ -30,7 +30,7 @@ export async function GET(req: Request) {
     return NextResponse.json(contacts);
   }
 
-  // Basic search across fields
+  
   const contacts = await sql`
     SELECT id, name, phone, email, company, COALESCE(favorite, false) AS favorite
     FROM contacts

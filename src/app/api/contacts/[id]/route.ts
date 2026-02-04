@@ -91,28 +91,6 @@ export async function PUT(
   return NextResponse.json({ success: true });
 }
 
-export async function PATCH(
-  req: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const { id } = await params;
-  const userId = await getUserId();
-  if (!userId) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const { favorite } = await req.json();
-
-  await sql`
-    UPDATE contacts
-    SET favorite = ${favorite === true}
-    WHERE id = ${id}
-      AND user_id = ${userId}
-  `;
-
-  return NextResponse.json({ success: true });
-}
-
 export async function DELETE(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }

@@ -1,6 +1,6 @@
 # Contact Manager
 
-A full-stack contact management app built with Next.js. Users can register, log in, and manage their own contacts (add, edit, delete, search, mark favorites). Data is stored in Neon (serverless Postgres).
+A full-stack contact management app built with Next.js. Users can register, log in, and manage their own contacts (add, search, mark favorites). Data is stored in Neon (serverless Postgres).
 
 ## Prerequisites
 
@@ -92,7 +92,7 @@ All contact endpoints are scoped by the current user (session cookie); users onl
 
 Base URL: same origin (e.g. `http://localhost:3000`).  
 Auth: session cookie set by `POST /api/login` or `POST /api/register` (then login).  
-Error responses use `{ "error": "message" }` with an appropriate status code.
+
 
 ### Auth
 
@@ -111,17 +111,16 @@ All contact routes require an authenticated session (session cookie). Otherwise 
 | GET    | `/api/contacts` | — | `Contact[]` | List current user’s contacts. Optional query `?q=...` to search (name, phone, email, company). |
 | POST   | `/api/contacts` | `{ "name", "phone", "email", "company" }` | `{ "success": true }` | Create contact. Phone normalized to 10 digits. All fields required. |
 | GET    | `/api/contacts/[id]` | — | `Contact` | Single contact. 404 if not found or not owned by user. |
-| PUT    | `/api/contacts/[id]` | `{ "name", "phone", "email", "company", "favorite"? }` | `{ "success": true }` | Full update. name, phone, email, company required; phone 10 digits. |
-| PATCH  | `/api/contacts/[id]` | `{ "favorite": boolean }` | `{ "success": true }` | Toggle favorite only. |
+| PUT    | `/api/contacts/[id]` | `{ "name", "phone", "email", "company", "favorite"? }` | `{ "success": true }` | Full update. name, phone, email, company required; phone 10 digits. Optional `favorite` to update only that. |
 | DELETE | `/api/contacts/[id]` | — | `{ "success": true }` | Delete contact (only if owned by user). |
 
 **Contact shape**
 
 ```ts
 {
-  id: string;      // UUID
+  id: string;      
   name: string;
-  phone: string;   // 10 digits
+  phone: string;   
   email: string;
   company: string;
   favorite: boolean;
@@ -132,7 +131,7 @@ All contact routes require an authenticated session (session cookie). Otherwise 
 
 | Method | Path | Auth | Response | Notes |
 |--------|------|------|----------|--------|
-| GET    | `/api/setup` | No | `{ "success": true }` | Creates `users` and `contacts` tables if not present; adds `favorite` to `contacts` if missing. Call once per environment. |
+| GET    | `/api/setup` | No | `{ "success": true }` | Creates `users` and `contacts` tables if not present |
 
 ---
 

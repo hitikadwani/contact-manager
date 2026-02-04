@@ -49,7 +49,6 @@ export async function POST(req: Request) {
     );
   }
 
-  // Store only the hash; never store plain passwords
   const hashed = await bcrypt.hash(password, 10);
 
   await sql`

@@ -14,7 +14,6 @@ A full-stack contact management app built with Next.js. Users can register, log 
 
 ```bash
 git clone git@github.com:hitikadwani/contact-manager.git
-cd contact-manager
 npm install
 ```
 

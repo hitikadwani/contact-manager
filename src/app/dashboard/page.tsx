@@ -137,7 +137,11 @@ export default function DashboardPage() {
                   ) : (
                     contacts.map((c) => (
                       <tr key={c.id}>
-                        <td>{c.name}</td>
+                        <td>
+                          <Link href={`/contacts/${c.id}`} className='name-link'>
+                            {c.name}
+                          </Link>
+                        </td>
                         <td>{c.phone}</td>
                         <td className="email">{c.email ?? '—'}</td>
                         <td>
